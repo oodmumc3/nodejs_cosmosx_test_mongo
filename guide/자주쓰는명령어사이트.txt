@@ -1,0 +1,8 @@
+자주쓰는 명령어
+cd certbot  # /certbot 디렉토리로 이동해 작업 시작
+service nginx stop   # 80포트를 사용하지 않토록 nginx를 중단시킴
+./certbot-auto certonly # 인증 절차 진행, 조금 시간이 걸립니다.
+service nginx start # 작업이 끝나면 다시 nginx를 가동시킴
+
+https://www.ssllabs.com/ #ssl작업확인사이트
+https://www.ssllabs.com/ssltest/analyze.html?d=cosmosx.net

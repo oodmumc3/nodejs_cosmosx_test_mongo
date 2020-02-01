@@ -1,0 +1,339 @@
+/*
+--------------------------------------------------------------------------------------------
+           기능            \  768px 미만    \ 768px 이상 \ 992px 이상 \     1200px 이상     \
+---------------------------------------------------------------------------------------------
+                그리드배열 \ 항상가로배열   \ 가로 배열에서 위 수치에이르면 세로 배열로 전환
+            .container너비 \ 없음(항상전체) \ 750px      \ 970px      \      1170px         \
+      클래스 선택자 접두어 \    .col-xs-    \   col-sm-  \   col-md-  \     col-lg-         \
+거터(그리드 사이 여백)크기 \ 30px, 그리드 좌우측 15px 패딩            \                     \
+id #  유일한요소
+class . 복수요소
+우선순위 id>class
+
+span 줄
+div  블록
+
+----------------------------------------------------------------------------------------------
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+footer {
+    background: rosybrown;
+    width: 100%;
+    float: none;
+    margin: 0 auto;
+}
+
+
+.one {
+    background: limegreen;
+    width: 100%;
+    padding: 5px;
+}
+
+.one_singup_info {
+    background-color: yellowgreen;
+    padding: 50;
+    margin: 20;
+    width: 100%;
+}
+
+.two {
+    float: none;
+    margin: 0 auto;
+    background: darkgreen;
+    width: 100%;
+    padding: 0;
+}
+
+.topmain_full_one {
+    width: 100%;
+    float: none;
+    margin: 0;
+    background: sandybrown;
+    /*padding:  auto 5px;*/
+}
+
+.topsidebar {
+    background: brown;
+    width: 100%;
+    padding: 5px;
+    float: left;
+}
+
+.main_board_full_one_left,
+.main_board_full_one_login{
+    background: yellow;
+    width: 100%;
+    padding: 10px;
+    float: left;
+}
+
+.main_board_one_left,
+.main_board_one_login {
+    background: skyblue;
+    width: 100%;
+    padding: 10px 0px;
+    float: left;
+}
+
+.main_board_one_left_XbX_full {
+    background: lavender;
+    margin: 10px 0;
+}
+
+.main_board_one_left_1b1 {
+    background: lavender;
+    margin: 10px 0;
+}
+
+.main_board_one_left_1b2 {
+    background: thistle;
+    margin: 10px 0;
+}
+
+.main_board_one_left_2b1 {
+    background: plum;
+    margin: 10px 0;
+}
+
+.main_board_one_left_2b2 {
+    background: violet;
+    margin: 10px 0;
+}
+/* 세칸*/
+
+
+.main_board_full_one_light {
+    background: gray;
+    width: 100%;
+    padding: 5px;
+    float: left;
+}
+
+.main_board_full_one_light_1b1 {
+    background: bisque;
+    margin: 10px 0;
+}
+
+.main_board_full_one_light_2b1 {
+    background: navajowhite;
+    margin: 10px 0;
+}
+
+.main_board_full_one_light_3b1 {
+    background: wheat;
+    margin: 10px 0;
+}
+
+.main_board_full_one_light_4b1 {
+    background: burlywood;
+    margin: 10px 0;
+}
+
+.main_board_full_one_light_5b1 {
+    background: tan;
+    margin: 10px 0;
+}
+
+/* 세칸*/
+
+
+.gang {
+    background: wheat;
+    float: none;
+    margin: 0 auto;
+}
+
+.navbar .dropdown-toggle,
+.navbar .dropdown-menu a {
+    cursor: pointer;
+}
+
+.navbar .dropdown-item.active,
+.navbar .dropdown-item:active {
+    color: inherit;
+    text-decoration: none;
+    background-color: inherit;
+}
+
+.navbar .dropdown-item:focus,
+.navbar .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+@media (min-width: 300px) {
+    .one {
+        width: auto;
+        padding: 0px;
+    }
+
+    .two {
+        width: 100%;
+    }
+
+    /*.topmaintest {width: 1%;}*/
+    .gang {
+        width: auto;
+        padding: 0px;
+    }
+
+    footer {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media (min-width: 767px) {
+    .navbar .dropdown-toggle:not(.nav-link)::after {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: .5em;
+        vertical-align: 0;
+        border-bottom: .3em solid transparent;
+        border-top: .3em solid transparent;
+        border-left: .3em solid;
+    }
+
+    .one {
+        width: auto;
+        padding: 0px;
+    }
+
+    .two {
+        width: 90%;
+    }
+
+    /*.topmaintest {width: 10%;}*/
+    .gang {
+        width: 90%;
+        padding: 5px 10px;
+    }
+
+    footer {
+        width: 90%;
+        padding: 5px 10px;
+    }
+}
+
+
+
+
+
+.tab {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+/* Float the list items side by side */
+.tab li {
+    float: left;
+}
+
+/* Style the links inside the list items */
+.tab li a {
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    padding: 4px 16px;
+    font-size: 15px;
+    /*탭메뉴 폰트사이즈*/
+    transition: 0.3s;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    background-color: rgb(0, 154, 200);
+    padding: 6px 12px;
+    color: #fff;
+    width: 100%;
+}
+
+ul.tab li.current {
+    background-color: rgb(0, 154, 200);
+    color: #222;
+}
+
+.tabcontent.current {
+    display: block;
+}

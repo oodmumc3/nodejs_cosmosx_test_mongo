@@ -1,0 +1,32 @@
+SSL갱신
+touch /root/letsencrypt.sh #쉘스크립트 생성
+chmod 755 /root/letsencrypt.sh #권한주기 빼기644
+
+
+#!/bin/sh #letsencrypt.sh 파일내용추가
+/etc/init.d/nginx stop
+if ! /root/tools/letsencrypt/letsencrypt-auto -renew > /var/log/letsencrypt-renew.log 2>&1 ; then
+    echo Automated renew failed;
+    cat /var/log/letsencrypt-renew.log
+    exit 1
+fi
+/etc/init.d/nginx start
+
+
+vi /etc/crontab #crontab 아래내용추가
+30 0 1 1-12 * root /root/letsencrypt.sh
+////////////////////////////////////////////////////
+
+43 6 * * * /var/www/nodejs_cosmosx_test/letsencrypt/certbot renew --renew-hook "systemctl reload nginx" >> /var/www/nodejs_cosmosx_test/ssl-renew.log
+6 5,10 * * * /var/www/nodejs_cosmosx_test/letsencrypt/certbot renew --renew-hook "sudo service nginx restart" >> /var/www/nodejs_cosmosx_test/ssl-renew.log
+6 5,10 * * * "sudo service nginx restart" >> /var/www/nodejs_cosmosx_test/ssl-renew.log
+분 시 몇일 몇월 요일(0~7,월요일은1) 실행할명령어 [,]중복값
+
+su권한으로 적용할것
+./certbot-auto renew #ssl 갱신명령어
+./certbot-auto certificates #ssl 갱신일 확인
+certbot certificates
+
+sudo crontab -e
+sudo crontab -i
+

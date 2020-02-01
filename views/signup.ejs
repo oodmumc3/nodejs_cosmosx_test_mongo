@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <% include ./head.ejs %>
+</head>
+
+<body>
+    <div class="one">
+        <div class="two">
+            <% include ./menubar_signup.ejs %>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="topmain_full_one col-lg-12 col-sm-12">
+                        <div class="row ">
+
+                            <div class="main_board_full_one_login col-lg-12 col-sm-12">
+                                <!--본문 내용-->
+                                <div class="row">
+                                    <p>프레임분할을 위한 class</p>
+                                    <div class="main_board_one_login col-lg-12 col-sm-12">
+                                        <p>로그인화면</p>
+                                        <div class="main_board_one_login_input col-lg-4 col-sm-12">
+                                            <br>
+                                            <form method="post" action="/signup">
+                                                <table>
+                                                    <tr>
+                                                        <td><label>E-Mail</label></td>
+                                                        <td><input type="text" name="email" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>비밀번호</label></td>
+                                                        <td><input type="password" name="password" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>비밀번호확인</label></td>
+                                                        <td><input type="password" name="password2" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>닉네임</label></td>
+                                                        <td><input type="text" name="name" /></td>
+                                                    </tr>
+                                                </table>
+                                                <input type="submit" value="가입완료" name="" />
+                                            </form>
+                                        </div>
+                                        <p>카카오톡으로 가입/ 구글로 가입/ 페이스북으로 가입</p>
+                                        <!--타입 버튼인지 아닌지확인-->
+                                        <form method="get" action="/signup"></form>
+                                        <button type="button" class="btn btn-warning" value="카카오가입" name="" href="https://kauth.kakao.com/oauth/authorize?client_id=dfe7e58f167ff549469dbd1eaf8cafd7&redirect_uri=http://localhost:52222/auth/kakao&response_type=code">카카오가입<i class="fa fa-btc"></i></button>
+                                        <button type="button" class="btn btn-success"value="구글가입" name="" onclick="location.href='kakao_login.html'">구글가입<i class="fa fa-google"></i></button>
+                                        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> 페이스북으로 로그인</a>
+                                        <br>
+                                        <input type="button" value="로그인 화면으로" onclick="location.href='/login';">
+                                        <input type="button" value="아이디/비번찾기" onclick="location.href='main_login.html';">
+
+                                        <script type='text/javascript'>
+                                          //<![CDATA[
+                                            // 사용할 앱의 JavaScript 키를 설정해 주세요.
+                                            Kakao.init('480028ac32883725fc0827a263956c67');
+                                            // 카카오 로그인 버튼을 생성합니다.
+                                            Kakao.Auth.createLoginButton({
+                                              container: '#kakao-login-btn',
+                                              success: function(authObj) {
+                                                alert(JSON.stringify(authObj));
+                                              },
+                                              fail: function(err) {
+                                                 alert(JSON.stringify(err));
+                                              }
+                                            });
+                                          //]]>
+                                        </script>
+                                        </form>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="gang">
+        광고페이지 
+    </div>
+    <footer>
+        <% include ./footer.ejs %>
+    </footer>
+
+
+</body>
+
+</html>

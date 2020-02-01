@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <% include ./head.ejs %>
+</head>
+
+<body>
+    <div class="one">
+        <div class="two">
+            <% include ./menubar.ejs %>
+            
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="topmain_full_one col-lg-12 col-sm-12">
+                        <div class="row ">
+                           
+                            <!-- 탭메뉴 만들기 -->
+                            <ul class="tab col-lg-12 col-sm-12">
+                                <li class="current" data-tab="tab1"><a href="#">가격표</a> </li>
+                                <li data-tab="tab2"><a href="#">보팅현황</a></li>
+                                <li data-tab="tab3"><a href="#">뉴스</a></li>
+                                <li data-tab="tab4"><a href="#">이벤트</a></li>
+                                <li data-tab="tab5"><a href="#">기타s</a></li>
+
+                            </ul>
+
+                            <div id="tab1" class="tabcontent current">
+                                <input type="button" class="btn btn-secondary" value="게사판이동" onclick="location.href='/listpost.html'">
+                                <h3>코인시세</h3>
+                                <p>▶비트코인, 이더리움, 이오스, 코스모스, 기타 허브코인 </p>
+                                <p>비트코인 - 비트캐쉬, 비트캐쉬SV, 비트골드, 레이븐 </p>
+                                <p>이더리움 - 이더클래식, 이더리움포크코인 </p>
+                                <p>이오스 - 텔로스, 이오스포스, 워블리,이오스 브라더코인 </p>
+                                <p>코스모스 - 테라, BNB, 코스모스 허브코인 </p>
+                            </div>
+
+                            <div id="tab2" class="tabcontent">
+                                <h3>코스모스 보팅현황 및 수익</h3>
+                                <p>▶코스모스 본딩률, 노드정보, 시총, 유통량, 현재버전</p>
+                                <p>국내외 노드보팅시 수익률,노드별 수익순위</p>
+                                <p>노드소개(사진과 소개글요약,클릭하면 페이지 이동), 노드 평판사이트</p>
+                            </div>
+
+                            <div id="tab3" class="tabcontent">
+                                <h3>뉴스</h3>
+                                <p>업계소식, 동향, 법적 시화적 문제점 조사글 링크</p>
+                            </div>
+
+                            <div id="tab4" class="tabcontent">
+                                <h3>이벤트</h3>
+                                <p>홈페이지 이벤트, 시즌별 슬로건</p>
+                            </div>
+                            <div id="tab5" class="tabcontent">
+                                <h3>기타</h3>
+                                <p>추천내용</p>
+                            </div>
+                            <div class="main_board_full_one_left col-lg-9 col-sm-12">
+                                <!--본문 내용-->
+                                <div class="row">
+                                    <p>프레임분할을 위한 class</p>
+                                    <div class="main_board_one_left col-lg-12 col-sm-12">
+                                        <p>게시판1</p>
+                                        <div class="row">
+                                            <div class="main_board_one_left_1b1 col-lg-6 col-sm-12">
+                                                <p>자유게시판</p>
+                                                <form method="post" action="/listpost">
+                                                    <table>
+                                                        <tr>
+                                                            <td><label>아래 [전송] 버튼을 누르세요.</label></td>
+                                                        </tr>
+                                                    </table>
+                                                    <input type="hidden" name="page" value="0" />
+                                                    <input type="hidden" name="perPage" value="5" />
+                                                    <input type="submit" value="전송" name="" />
+                                                    <span id="board_title"><%=title %>aaa</span>
+                                                </form>
+                                            </div>
+
+                                            <div class="main_board_one_left_1b2 col-lg-6 col-sm-12">
+                                                <p>노드팀 정보게시판</p>
+                                            </div>
+
+                                            <div class="main_board_one_left_2b1 col-lg-6 col-sm-12">
+                                                <p>체인간비교(엔진, 커뮤니티, 비지니스</p>
+                                            </div>
+
+                                            <div class="main_board_one_left_2b2 col-lg-6 col-sm-12">
+                                                <p>이벤트, 공지사항, 코인동향 뉴스</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main_board_full_one_light col-lg-3 col-sm-12">
+                                <!--사이드바 내용-->
+                                <p>사이드바 개인정보 삽입</p>
+                                <div class="row">
+                                    <div class="main_board_full_one_light_1b1 col-lg-12 col-sm-12">
+                                        <p>레벨, 점수, 알람, 내글, 내댓글</p>
+                                    </div>
+                                    <div class="main_board_full_one_light_2b1 col-lg-12 col-sm-12">
+                                        <p>인기글, 최신글, 최신댓글</p>
+                                    </div>
+                                    <div class="main_board_full_one_light_3b1 col-lg-12 col-sm-12">
+                                        <p>공지사항</p>
+                                    </div>
+                                    <div class="main_board_full_one_light_4b1 col-lg-12 col-sm-12">
+                                        <p>이벤트</p>
+                                    </div>
+                                    <div class="main_board_full_one_light_5b1 col-lg-12 col-sm-12">
+                                        <p>광고</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="gang">
+        광고페이지
+    </div>
+    <footer>
+        <% include ./footer.ejs %>
+    </footer>
+
+
+</body>
+
+</html>

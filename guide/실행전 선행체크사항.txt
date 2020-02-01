@@ -1,0 +1,5 @@
+1207
+설치가 필요한 프로그램
+apt-get update   # 항상 소프트웨어를 설치하기 전에 최신 업데이트가 있는 지 학인
+apt-get install git # git 설치
+
