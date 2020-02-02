@@ -1,4 +1,7 @@
     <h1>지금 인증안됨_menubarbasic </h1>
+    <% if (isAuth) { %>
+    <h5><%= user.name %></h5>
+    <% } %>
     <input type="button" value="가입하기" onclick="location.href='/signup';">
     <!--<a href="sign_page.html" target="_blank">가입하기 - </a> 새탭으로 전환됨!!-->
     <input type="button" value="로그인" onclick="location.href='/login';">

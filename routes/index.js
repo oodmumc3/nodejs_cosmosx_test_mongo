@@ -11,6 +11,7 @@ var Entities = require('html-entities').AllHtmlEntities;
 
 var main_listpost = function(req, res) {
 	console.log('post 모듈 안에 있는 listpost 호출됨.');
+	console.log('res.locals :: ', res.locals);
   
     var paramPage = req.body.page || req.query.page;
     var paramPerPage = req.body.perPage || req.query.perPage;
@@ -44,9 +45,6 @@ var main_listpost = function(req, res) {
  
 				// 전체 문서 객체 수 확인
 				database.PostModel.count().exec(function(err, count) {
-
-					res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-					
 					// 뷰 템플레이트를 이용하여 렌더링한 후 전송
 					var context = {
 						title: '글 목록',
@@ -57,22 +55,9 @@ var main_listpost = function(req, res) {
 						totalRecords: count,
 						size: paramPerPage
 					};
-					
-					req.app.render('index', context, function(err, html) {
-                        if (err) {
-                            console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
 
-                            res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                            res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
-                            res.write('<p>' + err.stack + '</p>');
-                            res.end();
-
-                            return;
-                        }
-                        
-						res.end(html);
-					});
-					
+					// https://stackoverflow.com/questions/15403791/whats-the-difference-between-app-render-and-res-render-in-express-js
+					res.render('index', context);
 				});
 				
 			} else {

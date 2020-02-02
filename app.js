@@ -57,7 +57,8 @@ console.log('뷰 엔진이 ejs로 설정되었습니다.');
 //===== 서버 변수 설정 및 static으로 public 폴더 설정  =====//
 console.log('config.server_port : %d', config.server_port);
 app.set('port', process.env.PORT || 52222);
- 
+
+
 
 // body-parser를 이용해 application/x-www-form-urlencoded 파싱
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -69,7 +70,7 @@ app.use(bodyParser.json())
 //app.use('/public', static(path.join(__dirname, 'public')));
 
 //app.use(express.static(__dirname + '/public'));
-app.use(express.static(path.join(__dirname , 'public'))); 
+app.use(express.static(path.join(__dirname , 'public')));
 
 // cookie-parser 설정
 app.use(cookieParser());
@@ -78,7 +79,9 @@ app.use(cookieParser());
 app.use(expressSession({
 	secret:'my key',
 	resave:true,
-	saveUninitialized:true
+	saveUninitialized:true,
+    // 세션 6시간 유지
+    cookie: {maxAge: 1000 * 60 * 60 * 6}
 }));
 
 
@@ -88,13 +91,17 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
- 
-
+app.use((req, res, next) => {
+    res.locals.isAuth = req.isAuthenticated();
+    if (req.isAuthenticated()) {
+        res.locals.user = req.user;
+    }
+    next();
+});
 
 //라우팅 정보를 읽어들여 라우팅 설정
 var router = express.Router();
 route_loader.init(app, router);
-
 
 // 패스포트 설정
 var configPassport = require('./config/passport');
@@ -103,9 +110,6 @@ configPassport(app, passport);
 // 패스포트 라우팅 설정
 var userPassport = require('./routes/user_passport');
 userPassport(router, passport);
-
-
-
 //===== 404 에러 페이지 처리 =====//
 var errorHandler = expressErrorHandler({
  static: {
@@ -115,7 +119,6 @@ var errorHandler = expressErrorHandler({
 
 app.use( expressErrorHandler.httpError(404) );
 app.use( errorHandler );
-
 
 //===== 서버 시작 =====//
 
