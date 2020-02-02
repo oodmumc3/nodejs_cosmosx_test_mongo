@@ -5,7 +5,8 @@
 
 module.exports = {
 	server_port: 3000,
-	db_url: 'mongodb+srv://admin:1111@costest-pqydf.mongodb.net/db_costest?retryWrites=true&w=majority',
+	// db_url: 'mongodb+srv://localhost:32768/cosmosx?retryWrites=true&w=majority',
+    db_url: 'mongodb://cosmosx:cosmosx@localhost:32768/cosmosx',
 	//db_url: 'mongodb://localhost:27017/local',
 	db_schemas: [
 		{file:'./user_schema', collection:'users6', schemaName:'UserSchema', modelName:'UserModel'}

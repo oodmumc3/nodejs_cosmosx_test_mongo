@@ -79,7 +79,7 @@
                                                 <div class="ui very relaxed selection celled list">
                                                     <%  var noStart = (pageCount - page) * perPage;
                                                     
-                                                        for (var i = 0; i < 3; i++) {
+                                                        for (var i = 0; i < posts.length; i++) {
                                                            var curTitle = posts[i]._doc.title;
                                                            var curWriter = posts[i]._doc.writer.email;
                                                            var date = posts[i]._doc.updated_at; 
