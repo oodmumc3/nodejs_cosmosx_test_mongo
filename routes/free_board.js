@@ -1,4 +1,5 @@
 const FreeBoardService = require('../service/free_board_service');
+const DateFormat = require('date-format');
 
 exports.index = async (req, res) => {
     const perPage = req.query.perPage || 2;
@@ -54,6 +55,11 @@ exports.view = async (req, res) => {
         // mongoose의 _id는 .equals로 비교해야함.
         board.isOwner = board.userId.equals(req.user._id);
     }
+
+    for (const comment of board.comments) {
+        comment.created_at_format = DateFormat.asString('yyyy-MM-dd hh:mm:ss', comment.created_at);
+    }
+
 
     res.render('free_board/view.ejs', {
         board,

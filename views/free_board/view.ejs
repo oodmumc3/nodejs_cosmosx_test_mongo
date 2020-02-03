@@ -88,7 +88,7 @@
                                                 <tr>
                                                     <td><%= comment.writer.name %></td>
                                                     <td><%= comment.contents %></td>
-                                                    <td><%= comment.created_at %></td>
+                                                    <td><%= comment.created_at_format %></td>
                                                     <td>
                                                         <% if (sessionUserId == comment.writer._id) { %>
                                                             <button type="button" class="btn btn-danger" onclick="location.href = '/free_board/comment/delete/<%= board.id %>/<%= comment.id %>'">삭제</button>
