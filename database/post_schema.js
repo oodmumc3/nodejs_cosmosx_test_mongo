@@ -11,7 +11,7 @@ exports.createSchema = function(mongoose) {
 	    contents: {type: String, trim: true, 'default':''},
 		writer: {type: mongoose.Schema.ObjectId, ref: 'users6'},
 		viewcount: {type: Number, default:0},
-        password: {type: String, maxlength: 5},
+        password: {type: String, maxlength: 4},
         comments: [{
 	    	contents: {type: String, trim:true, 'default': ''},
 	    	writer: {type: mongoose.Schema.ObjectId, ref: 'users6'},
