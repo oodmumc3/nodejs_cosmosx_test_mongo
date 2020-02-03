@@ -7,9 +7,7 @@
 
 var utils = require('../utils/utils');
 
-var SchemaObj = {};
-
-SchemaObj.createSchema = function(mongoose) {
+exports.createSchema = function(mongoose) {
 	
 	// 글 스키마 정의
 	var PostSchema = mongoose.Schema({
@@ -88,13 +86,8 @@ SchemaObj.createSchema = function(mongoose) {
             this.findOneAndUpdate(query, update, options, callback);            
         }
 
-	}
-	
-	console.log('PostSchema 정의함.');
+	};
 
 	return PostSchema;
 };
-
-// module.exports에 PostSchema 객체 직접 할당
-module.exports = SchemaObj;
 

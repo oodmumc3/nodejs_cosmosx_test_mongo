@@ -51,8 +51,6 @@ var app = express();
 //===== 뷰 엔진 설정 =====//
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-console.log('뷰 엔진이 ejs로 설정되었습니다.');
-
 
 //===== 서버 변수 설정 및 static으로 public 폴더 설정  =====//
 console.log('config.server_port : %d', config.server_port);
@@ -84,13 +82,14 @@ app.use(expressSession({
     cookie: {maxAge: 1000 * 60 * 60 * 6}
 }));
 
-
-
 //===== Passport 사용 설정 =====//
 // Passport의 세션을 사용할 때는 그 전에 Express의 세션을 사용하는 코드가 있어야 함
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+/**
+ * middleware로 사용자 로그인 여부 및 로그인 정보를 ejs로 보내준다.
+ */
 app.use((req, res, next) => {
     res.locals.isAuth = req.isAuthenticated();
     if (req.isAuthenticated()) {
@@ -125,8 +124,6 @@ app.use( errorHandler );
 //확인되지 않은 예외 처리 - 서버 프로세스 종료하지 않고 유지함
 process.on('uncaughtException', function (err) {
 	console.log('uncaughtException 발생함 : ' + err);
-	console.log('서버 프로세스 종료하지 않고 유지함.');
-	
 	console.log(err.stack);
 });
 
@@ -146,8 +143,6 @@ app.on('close', function () {
 // 시작된 서버 객체를 리턴받도록 합니다. 
 var server = http.createServer(app).listen(app.get('port'), function(){
 	console.log('서버가 시작되었습니다. 포트 : ' + app.get('port'));
-
 	// 데이터베이스 초기화
 	database.init(app, config);
-   
 });
