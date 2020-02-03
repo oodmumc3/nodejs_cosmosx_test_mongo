@@ -19,6 +19,13 @@ module.exports = {
         ,{file:'./post', path:'/process/showpost/:id', method:'showpost', type:'get'}
         ,{file:'./post', path:'/listpost', method:'listpost', type:'post'}
         ,{file:'./post', path:'/listpost', method:'listpost', type:'get'}
+        ,{file:'./free_board', path:'/free_board/index', method:'index', type:'get'}
+        ,{file:'./free_board', path:'/free_board/write', method:'write', type:'get'}
+        ,{file:'./free_board', path:'/free_board/write', method:'save', type:'post'}
+        ,{file:'./free_board', path:'/free_board/view/:id', method:'view', type:'get'}
+        ,{file:'./free_board', path:'/free_board/update/:id', method:'updateForm', type:'get'}
+        ,{file:'./free_board', path:'/free_board/update', method:'update', type:'post'}
+        ,{file:'./free_board', path:'/free_board/delete/:id', method:'delete', type:'get'}
 	],
 	facebook: {		// passport facebook
 		clientID: '1102063383323186',

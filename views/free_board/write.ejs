@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <% include ../head.ejs %>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#submitBtn').click(function (e) {
+                var title = $('#title').val();
+                // var contents = $('#contents').val();
+                var contents = CKEDITOR.instances.contents.getData();
+                var isUsePassword = $('#password').length !== 0;
+                var password = $('#password').val();
+
+                if (!title) {
+                    alert('제목을 입력해주세요');
+                    return;
+                }
+
+                if (!contents) {
+                    alert('내용을 입력해주세요');
+                    return;
+                }
+
+                if (isUsePassword) {
+                    if (!password) {
+                        alert('비밀번호를 입력해주세요');
+                        return;
+                    }
+
+                    if (password.length !== 5) {
+                        alert('비밀번호는 5자리를 입력해주세요');
+                        return;
+                    }
+                }
+
+                $('#form').submit();
+            });
+
+            CKEDITOR.replace('contents');
+        });
+    </script>
+</head>
+
+<body>
+    <div class="one">
+        <div class="two">
+            <% include ../menubar_basic.ejs %>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="topmain_full_one col-lg-12 col-sm-12">
+                        <div class="row ">
+                            <div class="main_board_full_one_login col-lg-12 col-sm-12">
+                                <!--본문 내용-->
+                                <div class="row">
+                                    <p>프레임분할을 위한 class</p>
+                                    <div class="main_board_one_login col-lg-12 col-sm-12">
+                                        <p>자유게시판 - 글작성</p>
+                                            <br>
+                                        <form id="form" method="post" action="/free_board/<%= board.id ? 'update' : 'write' %>">
+                                            <input type="hidden" name="id" value="<%= board.id %>" />
+                                            <div class="form-group">
+                                                <label for="title">제목</label>
+                                                <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요." value="<%= board.title %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contents">내용</label>
+                                                <textarea class="form-control" id="contents" name="contents" rows="5"><%= board.contents %></textarea>
+                                            </div>
+                                            <% if (!isAuth && !board.id) { %>
+                                            <div class="form-group">
+                                                <label for="contents">비밀번호 (문자 5자리)</label>
+                                                <input maxlength="5" type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력해주세요.">
+                                            </div>
+                                            <% } %>
+                                            <% if (!isAuth && board.id) { %>
+                                                <div class="form-group">
+                                                    <label for="contents">글 비밀번호 확인</label>
+                                                    <input maxlength="5" type="password" class="form-control" id="passwordChk" name="passwordChk" placeholder="비밀번호확인을 입력해주세요.">
+                                                </div>
+                                            <% } %>
+                                        </form>
+
+                                        <div class="form-group">
+                                            <button id="submitBtn" type="button" class="btn btn-primary">확인</button>
+                                            <button type="button" class="btn btn-light" onclick="history.back();">취소</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gang">
+        광고페이지
+    </div>
+    <footer>
+        <% include ../footer.ejs %>
+    </footer>
+</body>
+
+</html>

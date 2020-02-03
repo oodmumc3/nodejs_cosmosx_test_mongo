@@ -8,7 +8,7 @@
 var mongoose = require('mongoose');
 
 // database 객체에 db, schema, model 모두 추가
-var database = {};
+const _MONGODB_MODEL = {};
 
 // config에 정의된 스키마 및 모델 객체 생성
 function createSchema(app, config) {
@@ -26,12 +26,12 @@ function createSchema(app, config) {
         console.log('%s 컬렉션을 위해 모델 정의함.', curItem.collection);
 
         // database 객체에 속성으로 추가
-        database[curItem.schemaName] = curSchema;
-        database[curItem.modelName] = curModel;
+        _MONGODB_MODEL[curItem.schemaName] = curSchema;
+        _MONGODB_MODEL[curItem.modelName] = curModel;
         console.log('스키마 이름 [%s], 모델 이름 [%s] 이 database 객체의 속성으로 추가됨.', curItem.schemaName, curItem.modelName);
     }
 
-    app.set('database', database);
+    app.set('database', _MONGODB_MODEL);
 }
 
 //데이터베이스에 연결하고 응답 객체의 속성으로 db 객체 추가
@@ -52,12 +52,13 @@ function connect(app, config) {
 }
 
 // 초기화를 위해 호출하는 함수
-database.init = function(app, config) {
+exports.init = function(app, config) {
 	connect(app, config);
 };
 
+exports.getMongooseModel = (modelName) => {
+    const model = _MONGODB_MODEL[modelName];
+    if (!model) { throw Error(`No Exist ${modelName} Model`); }
 
-
-
-// database 객체를 module.exports에 할당
-module.exports = database;
+    return model;
+};

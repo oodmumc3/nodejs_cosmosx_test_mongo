@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <% include ../head.ejs %>
+    <script type="text/javascript">
+        var errorMsg = '<%= errorMsg %>';
+        if (errorMsg && errorMsg.length !== 0) {
+            alert(errorMsg);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="one">
+        <div class="two">
+            <% include ../menubar_basic.ejs %>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="topmain_full_one col-lg-12 col-sm-12">
+                        <div class="row ">
+                            <div class="main_board_full_one_login col-lg-12 col-sm-12">
+                                <!--본문 내용-->
+                                <div class="row">
+                                    <p>프레임분할을 위한 class</p>
+                                    <div class="main_board_one_login col-lg-12 col-sm-12">
+                                        <p>자유게시판 - 글보기</p>
+                                            <br>
+                                        <div class="col-md-12 login-form-1">
+                                            <h4>제목</h4>
+                                            <div class="form-group">
+                                                <%= board.title %>
+                                            </div>
+
+                                            <h4>내용</h4>
+                                            <div class="form-group">
+                                                <%- board.contents %>
+                                            </div>
+
+                                            <h4>작성자</h4>
+                                            <div class="form-group">
+                                                <%= board.username %>
+                                            </div>
+
+                                            <h4>생성일</h4>
+                                            <div class="form-group">
+                                                <%= board.createdAt %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <% if (board.isUnKnownWriter) { %>
+                                                <button type="button" class="btn btn-primary" onclick="location.href = '/free_board/update/<%= board.id %>'">수정</button>
+                                                <form action="/free_board/delete/<%= board.id %>" method="get">
+                                                    <input maxlength="5" type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." />
+                                                    <button type="submit" class="btn btn-danger">삭제</button>
+                                                </form>
+                                            <% } %>
+                                            <% if (board.isOwner) { %>
+                                                <button type="button" class="btn btn-primary" onclick="location.href = '/free_board/update/<%= board.id %>'">수정</button>
+                                                <button type="button" class="btn btn-danger" onclick="location.href = '/free_board/delete/<%= board.id %>'">삭제</button>
+                                            <% } %>
+                                            <button type="button" class="btn btn-light" onclick="history.back();">뒤로</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gang">
+        광고페이지
+    </div>
+    <footer>
+        <% include ../footer.ejs %>
+    </footer>
+</body>
+
+</html>

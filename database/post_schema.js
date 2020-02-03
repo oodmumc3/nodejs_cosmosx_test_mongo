@@ -5,18 +5,15 @@
  * @author Mike
  */
 
-var utils = require('../utils/utils');
-
 exports.createSchema = function(mongoose) {
-	
-	// 글 스키마 정의
 	var PostSchema = mongoose.Schema({
-	    title: {type: String, trim: true, 'default':''},		// 글 제목
-	    contents: {type: String, trim:true, 'default':''},						// 글 내용
-		writer: {type: mongoose.Schema.ObjectId, ref: 'users6'},				// 글쓴 사람
-		viewcount: {type: Number, default:0},							
-	    comments: [{		// 댓글
-	    	contents: {type: String, trim:true, 'default': ''},					// 댓글 내용
+	    title: {type: String, trim: true, 'default':''},
+	    contents: {type: String, trim: true, 'default':''},
+		writer: {type: mongoose.Schema.ObjectId, ref: 'users6'},
+		viewcount: {type: Number, default:0},
+        password: {type: String, maxlength: 5},
+        comments: [{
+	    	contents: {type: String, trim:true, 'default': ''},
 	    	writer: {type: mongoose.Schema.ObjectId, ref: 'users6'},
 	    	created_at: {type: Date, 'default': Date.now}
 	    }],

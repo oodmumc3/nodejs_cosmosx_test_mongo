@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <% include ../head.ejs %>
+</head>
+
+<body>
+    <div class="one">
+        <div class="two">
+            <% include ../menubar_basic.ejs %>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="topmain_full_one col-lg-12 col-sm-12">
+                        <div class="row ">
+                            <div class="main_board_full_one_login col-lg-12 col-sm-12">
+                                <!--본문 내용-->
+                                <div class="row">
+                                    <p>프레임분할을 위한 class</p>
+                                    <div class="main_board_one_login col-lg-12 col-sm-12">
+                                        <p>자유게시판</p>
+                                        <form style="padding: 0%" action="" method="get">
+                                            <div class="row col-md-12">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="searchType" name="searchType">
+                                                        <option value="title" <%= searchType === 'title' ? 'selected' : '' %>>제목</option>
+                                                        <option value="contents" <%= searchType === 'contents' ? 'selected' : '' %>>내용</option>
+                                                        <option value="writer" <%= searchType === 'writer' ? 'selected' : '' %>>작성자</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" value="<%= searchTerm %>" class="form-control" id="searchTerm" name="searchTerm" aria-describedby="emailHelp">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-link">검색</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                            <br>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" width="10%">No.</th>
+                                                    <th scope="col" width="50%">제목</th>
+                                                    <th scope="col" width="20%">작성자</th>
+                                                    <th scope="col" width="20%">작성일</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% for (const board of boards) { %>
+                                                    <tr>
+                                                        <th scope="row"><%= board.num %></th>
+                                                        <td>
+                                                            <a href="/free_board/view/<%= board.id %>"><%= board.title %></a>
+                                                        </td>
+                                                        <td> <%= board.username %> </td>
+                                                        <td> <%= board.createdAt %> </td>
+                                                    </tr>
+                                                <% } %>
+                                                </tbody>
+                                            </table>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination justify-content-center">
+                                                <% for (let page = 1; page <= totalPage; page++) { %>
+                                                    <li class="page-item <%= currentPage == page ? 'active' : '' %>">
+                                                        <% let queryString = searchTerm ? `&searchType=${searchType}&searchTerm=${searchTerm}` : '' %>
+                                                        <a class="page-link" href="/free_board/index?page=<%= page %><%= queryString %>"><%= page %></a>
+                                                    </li>
+                                                <% } %>
+                                            </ul>
+                                        </nav>
+                                        <button type="button" class="btn btn-primary" onclick="location.href = '/free_board/write'">글작성</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="gang">
+        광고페이지
+    </div>
+    <footer>
+        <% include ../footer.ejs %>
+    </footer>
+
+
+</body>
+
+</html>
