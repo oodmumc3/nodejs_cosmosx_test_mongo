@@ -12,6 +12,9 @@ exports.createSchema = function(mongoose) {
 		writer: {type: mongoose.Schema.ObjectId, ref: 'users6'},
 		viewcount: {type: Number, default:0},
         password: {type: String, maxlength: 4},
+        isUseComments: { type: Boolean, default: true },
+        likes: [{type: mongoose.Schema.ObjectId, ref: 'users6'}],
+        hates: [{type: mongoose.Schema.ObjectId, ref: 'users6'}],
         comments: [{
 	    	contents: {type: String, trim:true, 'default': ''},
 	    	writer: {type: mongoose.Schema.ObjectId, ref: 'users6'},

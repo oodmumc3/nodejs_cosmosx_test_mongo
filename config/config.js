@@ -26,6 +26,10 @@ module.exports = {
         ,{file:'./free_board', path:'/free_board/update/:id', method:'updateForm', type:'get'}
         ,{file:'./free_board', path:'/free_board/update', method:'update', type:'post'}
         ,{file:'./free_board', path:'/free_board/delete/:id', method:'delete', type:'get'}
+        ,{file:'./free_board', path:'/free_board/comment/:id', method:'addComment', type:'post'}
+        ,{file:'./free_board', path:'/free_board/comment/delete/:boardId/:commentId', method:'deleteComment', type:'get'}
+        ,{file:'./free_board', path:'/free_board/like/:boardId', method:'addLike', type:'get'}
+        ,{file:'./free_board', path:'/free_board/hate/:boardId', method:'addHate', type:'get'}
 	],
 	facebook: {		// passport facebook
 		clientID: '1102063383323186',

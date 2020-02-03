@@ -48,6 +48,10 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <button type="button" class="btn btn-outline-info" onclick="location.href = '/free_board/like/<%= board.id %>'">좋아요 (<%= board.likeCount %>)</button>
+                                            <button type="button" class="btn btn-outline-danger" onclick="location.href = '/free_board/hate/<%= board.id %>'">싫어요 (<%= board.hateCount %>)</button>
+                                        </div>
+                                        <div class="form-group">
                                             <% if (board.isUnKnownWriter) { %>
                                                 <button type="button" class="btn btn-primary" onclick="location.href = '/free_board/update/<%= board.id %>'">수정</button>
                                                 <form action="/free_board/delete/<%= board.id %>" method="get">
@@ -61,6 +65,40 @@
                                             <% } %>
                                             <button type="button" class="btn btn-light" onclick="history.back();">뒤로</button>
                                         </div>
+                                        <% if (board.isUseComments) { %>
+                                            <% if (isAuth) { %>
+                                                <div class="form-group">
+                                                    <form action="/free_board/comment/<%= board.id %>" method="post" class="form-inline">
+                                                        <input maxlength="200" style="width: 50%" class="form-control" type="text" id="comment" name="comment" placeholder="댓글을 입력해주세요. (최대 200자)" />
+                                                        <button type="submit" class="btn btn-primary">입력</button>
+                                                    </form>
+                                                </div>
+                                            <% } %>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" width="10%">작성자</th>
+                                                    <th scope="col" width="60%">내용</th>
+                                                    <th scope="col" width="20%">작성날짜</th>
+                                                    <th scope="col" width="10%">삭제</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% for (comment of board.comments) { %>
+                                                <tr>
+                                                    <td><%= comment.writer.name %></td>
+                                                    <td><%= comment.contents %></td>
+                                                    <td><%= comment.created_at %></td>
+                                                    <td>
+                                                        <% if (sessionUserId == comment.writer._id) { %>
+                                                            <button type="button" class="btn btn-danger" onclick="location.href = '/free_board/comment/delete/<%= board.id %>/<%= comment.id %>'">삭제</button>
+                                                        <% } %>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                                </tbody>
+                                            </table>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>

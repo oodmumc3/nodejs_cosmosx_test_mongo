@@ -32,10 +32,11 @@ exports.write = (req, res) => {
 exports.save = async (req, res) => {
     const title = req.body.title;
     const contents = req.body.contents;
+    const isUseComment = req.body.isUseComment === 'on';
     const password = !req.isAuthenticated() ? req.body.password : null;
 
     try {
-        const id = await FreeBoardService.save(title, contents, password, req.user);
+        const id = await FreeBoardService.save(title, contents, password, isUseComment, req.user);
         res.redirect(`/free_board/view/${id}`);
     } catch (e) {
         console.error(e);
@@ -54,7 +55,11 @@ exports.view = async (req, res) => {
         board.isOwner = board.userId.equals(req.user._id);
     }
 
-    res.render('free_board/view.ejs', { board, errorMsg: req.flash('errorMsg') });
+    res.render('free_board/view.ejs', {
+        board,
+        sessionUserId: req.isAuthenticated() ? req.user._id : '',
+        errorMsg: req.flash('errorMsg')
+    });
 };
 
 exports.update = async (req, res) => {
@@ -112,3 +117,51 @@ exports.delete = async (req, res) => {
     await FreeBoardService.deleteOneById(boardId);
     res.redirect('/free_board/index');
 };
+
+exports.addComment = async (req, res) => {
+    if (!req.isAuthenticated()) { return res.redirect('/free_board/index'); }
+
+    const boardId = req.params.id;
+    const { comment } = req.body;
+
+    const board = await FreeBoardService.findOneById(boardId);
+    if (!board) { return res.redirect('/free_board/index'); }
+
+    await FreeBoardService.saveComment(boardId, comment, req.user);
+    res.redirect(`/free_board/view/${boardId}`);
+};
+
+exports.deleteComment = async (req, res) => {
+    if (!req.isAuthenticated()) { return res.redirect('/free_board/index'); }
+
+    const boardId = req.params.boardId;
+    const commentId = req.params.commentId;
+
+    await FreeBoardService.deleteComment(boardId, commentId, req.user);
+    res.redirect(`/free_board/view/${boardId}`);
+};
+
+exports.addLike = async (req, res) => {
+    const boardId = req.params.boardId;
+    if (!req.isAuthenticated()) {
+        req.flash('errorMsg', '좋아요/싫어요는 로그인 후 사용가능합니다.');
+        return res.redirect(`/free_board/view/${boardId}`);
+    }
+
+    const errorMsg = await FreeBoardService.addLike(boardId, req.user);
+    if (errorMsg) { req.flash('errorMsg', errorMsg); }
+    return res.redirect(`/free_board/view/${boardId}`);
+};
+
+exports.addHate = async (req, res) => {
+    const boardId = req.params.boardId;
+    if (!req.isAuthenticated()) {
+        req.flash('errorMsg', '좋아요/싫어요는 로그인 후 사용가능합니다.');
+        return res.redirect(`/free_board/view/${boardId}`);
+    }
+
+    const errorMsg = await FreeBoardService.addHate(boardId, req.user);
+    if (errorMsg) { req.flash('errorMsg', errorMsg); }
+    return res.redirect(`/free_board/view/${boardId}`);
+};
+
