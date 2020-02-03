@@ -74,23 +74,14 @@
                                                     <input type="hidden" name="perPage" value="5" />
                                                     <input type="submit" value="전송" name="" />
                                                 </form>
-                                                <span id="board_title"><br><br><%=title %>aaa</span>
+                                                <span id="board_title"><br><br><%=title %></span>
                                                 <ul>
                                                 <div class="ui very relaxed selection celled list">
-                                                    <%  var noStart = (pageCount - page) * perPage;
-                                                    
-                                                        for (var i = 0; i < posts.length; i++) {
-                                                           var curTitle = posts[i]._doc.title;
-                                                           // var curWriter = posts[i]._doc.writer.email;
-                                                            var curWriter = '';
-                                                           var date = posts[i]._doc.updated_at;
-                                                           var curNo = noStart - i;  %>
-
-                                                            <li class="list-group-item">
-                                                            <a href="/process/showpost/<%=posts[i]._id %>"> <%=curTitle %>//   <%=curWriter %>//   <%=date %></a>
-                                                            </li>     
-                                                    <% } %>	
-                                                 
+                                                    <% for (const p of posts) { %>
+                                                        <li class="list-group-item">
+                                                            <a href="/free_board/view/<%= p._id %>"> <%= p.title %> / <%= p.username %> / <%= p.created_at_format%> </a>
+                                                        </li>
+                                                    <% } %>
                                                 </div>
                                                 
                                                    <br>

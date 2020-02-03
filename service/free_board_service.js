@@ -102,7 +102,6 @@ exports.findFreeBoardListWithPaging = async (page, perPage, searchType, searchTe
     for (const board of boards) {
         board.num = startBoardNum--;
         board.username = board.writer ? board.writer.name : '[비회원]';
-        console.log("DateFormat.asString('yyyy-MM-dd hh:mm:ss', board.created_at) :: ", DateFormat.asString('yyyy-MM-dd hh:mm:ss', board.created_at));
         board.created_at_format = DateFormat.asString('yyyy-MM-dd hh:mm:ss', board.created_at);
     }
 
